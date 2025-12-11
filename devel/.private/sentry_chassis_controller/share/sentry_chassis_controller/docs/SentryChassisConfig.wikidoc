@@ -4,7 +4,7 @@ group.0 {
 name=Dynamically Reconfigurable Parameters
 desc=See the [[dynamic_reconfigure]] package for details on dynamically reconfigurable parameters.
 0.name= ~wheel_radius
-0.default= 0.07625
+0.default= 0.0762
 0.type= double
 0.desc=Wheel radius (m) Range: 0.01 to 0.2
 1.name= ~wheel_track

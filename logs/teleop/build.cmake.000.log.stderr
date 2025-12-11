@@ -1,5 +1,0 @@
-[31m[1mCMake Error[0m at /home/jkkkk/ros_ws/src/teleop/CMakeLists.txt:16 (target_link_libraries):
-  Cannot specify link libraries for target "teleop_twist_keyboard" which is
-  not built by this project.
-
-

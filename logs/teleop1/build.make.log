@@ -1,4 +1,0 @@
-[35m[1mScanning dependencies of target teleop1[0m
-[ 50%] [32mBuilding CXX object CMakeFiles/teleop1.dir/src/teleop_twist_keyboard.cpp.o[0m
-[100%] [32m[1mLinking CXX executable /home/jkkkk/ros_ws/devel/.private/teleop1/lib/teleop1/teleop1[0m
-[100%] Built target teleop1

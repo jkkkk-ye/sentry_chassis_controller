@@ -634,7 +634,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_radius = 0.2;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_radius = 0.07625;
+      __default__.wheel_radius = 0.0762;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_radius", "double", 0, "Wheel radius (m)", "", &SentryChassisConfig::wheel_radius)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"

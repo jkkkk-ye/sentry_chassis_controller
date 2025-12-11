@@ -1,7 +1,7 @@
 \subsubsection usage Usage
 \verbatim
 <node name="sentry_chassis_controller" pkg="sentry_chassis_controller" type="sentry_chassis_controller">
-  <param name="wheel_radius" type="double" value="0.07625" />
+  <param name="wheel_radius" type="double" value="0.0762" />
   <param name="wheel_track" type="double" value="0.362" />
   <param name="wheel_base" type="double" value="0.362" />
   <param name="control_mode" type="int" value="0" />
