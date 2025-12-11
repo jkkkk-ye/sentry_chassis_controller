@@ -13,6 +13,13 @@
         controller/joint_state_controller
   "/>
   
+   <!-- 启动 RViz -->
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find sentry_chassis_controller)/config/scc.rviz" />
+   
+    <!-- 3. 生成最佳斜坡（后方4米） -->
+  <node name="spawn_ramp" pkg="gazebo_ros" type="spawn_model" 
+        args="-file $(find sentry_chassis_controller)/models/best_ramp.sdf -sdf -model best_ramp -x 0 -y 0 -z 0" />
+  
   <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen"/>
   
 

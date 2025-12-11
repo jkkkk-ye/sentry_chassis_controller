@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/jkkkk/ros_ws/devel/.private/teleop1/setup.sh

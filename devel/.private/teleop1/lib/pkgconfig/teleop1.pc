@@ -1,0 +1,8 @@
+prefix=/home/jkkkk/ros_ws/devel/.private/teleop1
+
+Name: teleop1
+Description: Description of teleop1
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp geometry_msgs std_srvs
