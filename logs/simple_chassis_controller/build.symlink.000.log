@@ -1,0 +1,4 @@
+Symlinking /home/jkkkk/ros_ws/devel/lib/libsimple_chassis_controller.so
+Symlinking /home/jkkkk/ros_ws/devel/lib/pkgconfig/simple_chassis_controller.pc
+Symlinking /home/jkkkk/ros_ws/devel/share/simple_chassis_controller/cmake/simple_chassis_controllerConfig.cmake
+Symlinking /home/jkkkk/ros_ws/devel/share/simple_chassis_controller/cmake/simple_chassis_controllerConfig-version.cmake

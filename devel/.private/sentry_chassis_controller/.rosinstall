@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/jkkkk/ros_ws/devel/.private/sentry_chassis_controller/setup.sh

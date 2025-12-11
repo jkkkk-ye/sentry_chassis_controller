@@ -1,0 +1,6 @@
+devel_space: /home/jkkkk/ros_ws/devel
+install: false
+install_space: /home/jkkkk/ros_ws/install
+profile: default
+source_space: /home/jkkkk/ros_ws/src
+workspace: /home/jkkkk/ros_ws

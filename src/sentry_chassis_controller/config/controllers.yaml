@@ -1,0 +1,84 @@
+controller:
+  sentry_chassis_controller:
+    type: sentry_chassis_controller/SentryChassisController
+    
+    wheel_radius: 0.0762
+    wheel_track: 0.362
+    wheel_base: 0.362
+    
+    control_mode: 0  # 0: BASE_LINK_MODE, 1: GLOBAL_MODE
+    global_frame: "odom"
+    base_frame: "base_link"
+    
+     # ===== 新增：功能优化相关参数（与cfg/init默认值一致）=====
+    lock_delay: 1.0          # 自锁延迟时间（秒）：静止超过1秒触发自锁
+    lock_speed_thresh: 0.001 # 自锁速度阈值：速度<该值判定为静止（避免微小抖动触发）
+    wheel_feedforward_gain: 0.8 # 车轮速度前馈增益（提升响应，爬坡可调大到0.9）
+    steer_feedforward_gain: 0.8 # 舵机角度前馈增益（全向轮角度跟踪专用）
+    slip_thresh: 0.5         # 打滑检测阈值（rad/s）：目标-实际轮速>该值判定为打滑
+    slip_reduce_gain: 0.7    # 打滑降速增益：打滑时力矩×0.7（降速30%，避免空转）
+    max_wheel_torque: 25.0   # 车轮最大输出力矩（N·m）：爬坡可调大到30，平路调小到20
+    max_steer_torque: 10.0   # 舵机最大输出力矩（N·m）：角度跟踪抖动大则调小到8
+    # ============================================
+    
+    wheel_fl_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 10.0
+      i_clamp_min: -10.0
+      antiwindup: true
+    wheel_fr_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 10.0
+      i_clamp_min: -10.0
+      antiwindup: true
+    wheel_bl_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 10.0
+      i_clamp_min: -10.0
+      antiwindup: true
+    wheel_br_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 10.0
+      i_clamp_min: -10.0
+      antiwindup: true
+    
+    steer_fl_pid:
+      p: 10.0
+      i: 1.0
+      d: 0.5
+      i_clamp_max: 5.0
+      i_clamp_min: -5.0
+      antiwindup: true
+    steer_fr_pid:
+      p: 10.0
+      i: 1.0
+      d: 0.5
+      i_clamp_max: 5.0
+      i_clamp_min: -5.0
+      antiwindup: true
+    steer_bl_pid:
+      p: 10.0
+      i: 1.0
+      d: 0.5
+      i_clamp_max: 5.0
+      i_clamp_min: -5.0
+      antiwindup: true
+    steer_br_pid:
+      p: 10.0
+      i: 1.0
+      d: 0.5
+      i_clamp_max: 5.0
+      i_clamp_min: -5.0
+      antiwindup: true
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50

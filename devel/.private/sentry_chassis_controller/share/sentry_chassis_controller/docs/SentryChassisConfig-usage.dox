@@ -1,0 +1,66 @@
+\subsubsection usage Usage
+\verbatim
+<node name="sentry_chassis_controller" pkg="sentry_chassis_controller" type="sentry_chassis_controller">
+  <param name="wheel_radius" type="double" value="0.07625" />
+  <param name="wheel_track" type="double" value="0.362" />
+  <param name="wheel_base" type="double" value="0.362" />
+  <param name="control_mode" type="int" value="0" />
+  <param name="lock_delay" type="double" value="1.0" />
+  <param name="lock_speed_thresh" type="double" value="0.001" />
+  <param name="wheel_feedforward_gain" type="double" value="0.8" />
+  <param name="steer_feedforward_gain" type="double" value="0.8" />
+  <param name="slip_thresh" type="double" value="0.5" />
+  <param name="slip_reduce_gain" type="double" value="0.7" />
+  <param name="max_wheel_torque" type="double" value="25.0" />
+  <param name="max_steer_torque" type="double" value="10.0" />
+  <param name="wheel_fl_p" type="double" value="2.0" />
+  <param name="wheel_fl_i" type="double" value="0.1" />
+  <param name="wheel_fl_d" type="double" value="0.0" />
+  <param name="wheel_fl_i_max" type="double" value="10.0" />
+  <param name="wheel_fl_i_min" type="double" value="-10.0" />
+  <param name="wheel_fl_antiwindup" type="bool" value="True" />
+  <param name="wheel_fr_p" type="double" value="2.0" />
+  <param name="wheel_fr_i" type="double" value="0.1" />
+  <param name="wheel_fr_d" type="double" value="0.0" />
+  <param name="wheel_fr_i_max" type="double" value="10.0" />
+  <param name="wheel_fr_i_min" type="double" value="-10.0" />
+  <param name="wheel_fr_antiwindup" type="bool" value="True" />
+  <param name="wheel_bl_p" type="double" value="2.0" />
+  <param name="wheel_bl_i" type="double" value="0.1" />
+  <param name="wheel_bl_d" type="double" value="0.0" />
+  <param name="wheel_bl_i_max" type="double" value="10.0" />
+  <param name="wheel_bl_i_min" type="double" value="-10.0" />
+  <param name="wheel_bl_antiwindup" type="bool" value="True" />
+  <param name="wheel_br_p" type="double" value="2.0" />
+  <param name="wheel_br_i" type="double" value="0.1" />
+  <param name="wheel_br_d" type="double" value="0.0" />
+  <param name="wheel_br_i_max" type="double" value="10.0" />
+  <param name="wheel_br_i_min" type="double" value="-10.0" />
+  <param name="wheel_br_antiwindup" type="bool" value="True" />
+  <param name="steer_fl_p" type="double" value="10.0" />
+  <param name="steer_fl_i" type="double" value="1.0" />
+  <param name="steer_fl_d" type="double" value="0.5" />
+  <param name="steer_fl_i_max" type="double" value="5.0" />
+  <param name="steer_fl_i_min" type="double" value="-5.0" />
+  <param name="steer_fl_antiwindup" type="bool" value="True" />
+  <param name="steer_fr_p" type="double" value="10.0" />
+  <param name="steer_fr_i" type="double" value="1.0" />
+  <param name="steer_fr_d" type="double" value="0.5" />
+  <param name="steer_fr_i_max" type="double" value="5.0" />
+  <param name="steer_fr_i_min" type="double" value="-5.0" />
+  <param name="steer_fr_antiwindup" type="bool" value="True" />
+  <param name="steer_bl_p" type="double" value="10.0" />
+  <param name="steer_bl_i" type="double" value="1.0" />
+  <param name="steer_bl_d" type="double" value="0.5" />
+  <param name="steer_bl_i_max" type="double" value="5.0" />
+  <param name="steer_bl_i_min" type="double" value="-5.0" />
+  <param name="steer_bl_antiwindup" type="bool" value="True" />
+  <param name="steer_br_p" type="double" value="10.0" />
+  <param name="steer_br_i" type="double" value="1.0" />
+  <param name="steer_br_d" type="double" value="0.5" />
+  <param name="steer_br_i_max" type="double" value="5.0" />
+  <param name="steer_br_i_min" type="double" value="-5.0" />
+  <param name="steer_br_antiwindup" type="bool" value="True" />
+</node>
+\endverbatim
+

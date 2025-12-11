@@ -1,0 +1,9 @@
+<library path="lib/libsentry_chassis_controller">
+  <class name="sentry_chassis_controller/SentryChassisController"
+         type="sentry_chassis_controller::SentryChassisController"
+         base_class_type="controller_interface::ControllerBase">
+    <description>
+      A swerve drive controller for sentry robot with 8 independent PID controllers.
+    </description>
+  </class>
+</library>

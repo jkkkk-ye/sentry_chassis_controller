@@ -1,0 +1,8 @@
+prefix=/home/jkkkk/ros_ws/devel/.private/sentry_chassis_controller
+
+Name: sentry_chassis_controller
+Description: Description of sentry_chassis_controller
+Version: 0.1.0
+Cflags: -I/home/jkkkk/ros_ws/devel/.private/sentry_chassis_controller/include -I/home/jkkkk/ros_ws/src/sentry_chassis_controller/include
+Libs: -L${prefix}/lib -lsentry_chassis_controller
+Requires: roscpp controller_interface control_toolbox hardware_interface pluginlib dynamic_reconfigure tf nav_msgs geometry_msgs urdf angles realtime_tools
