@@ -120,7 +120,7 @@ public:
         move_bindings_['u'] = std::make_tuple(1, 0, 0, 1);
         move_bindings_[','] = std::make_tuple(-1, 0, 0, 0);
         move_bindings_['.'] = std::make_tuple(-1, 0, 0, 1);
-        move_bindings_['m'] = std::make_tuple(-1, 0, 0, -1);
+        move_bindings_['m'] = std::make_tuple(-1, 0, 0, 0);
         
         // 全向移动（需要Shift键）
         move_bindings_['I'] = std::make_tuple(1, 0, 0, 0);

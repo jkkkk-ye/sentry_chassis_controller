@@ -1,0 +1,20 @@
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:[m[K In member function ‘[01m[Kvoid sentry_chassis_controller::SentryChassisController::computeOdometry(const ros::Duration&)[m[K’:
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:689:29:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurrent_steer_pos_fl[m[K’ was not declared in this scope; did you mean ‘[01m[Kcurrent_wheel_vel_fl[m[K’?
+  689 |     angles::normalize_angle([01;31m[Kcurrent_steer_pos_fl[m[K),
+      |                             [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+      |                             [32m[Kcurrent_wheel_vel_fl[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:690:29:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurrent_steer_pos_fr[m[K’ was not declared in this scope; did you mean ‘[01m[Kcurrent_wheel_vel_fr[m[K’?
+  690 |     angles::normalize_angle([01;31m[Kcurrent_steer_pos_fr[m[K),
+      |                             [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+      |                             [32m[Kcurrent_wheel_vel_fr[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:691:29:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurrent_steer_pos_bl[m[K’ was not declared in this scope; did you mean ‘[01m[Kcurrent_wheel_vel_bl[m[K’?
+  691 |     angles::normalize_angle([01;31m[Kcurrent_steer_pos_bl[m[K),
+      |                             [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+      |                             [32m[Kcurrent_wheel_vel_bl[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:692:29:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurrent_steer_pos_br[m[K’ was not declared in this scope; did you mean ‘[01m[Kcurrent_wheel_vel_br[m[K’?
+  692 |     angles::normalize_angle([01;31m[Kcurrent_steer_pos_br[m[K)
+      |                             [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+      |                             [32m[Kcurrent_wheel_vel_br[m[K
+make[2]: *** [CMakeFiles/sentry_chassis_controller.dir/build.make:63：CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:214：CMakeFiles/sentry_chassis_controller.dir/all] 错误 2
+make: *** [Makefile:141：all] 错误 2

@@ -132,7 +132,6 @@ bool SentryChassisController::init(hardware_interface::EffortJointInterface* hw,
     last_raw_cmd_vel_ = geometry_msgs::Twist();
     last_cmd_vel_time_ = ros::Time::now();
 //==============    
-
     return true;
 }
 
@@ -239,10 +238,7 @@ void SentryChassisController::update(const ros::Time& time, const ros::Duration&
     // ===== 新增1：实时性保护（互斥锁，避免多线程冲突）=====
     static boost::mutex control_mutex;
     boost::unique_lock<boost::mutex> lock(control_mutex);
-/*    
-    geometry_msgs::Twist cmd_vel_global = *(cmd_vel_buffer_.readFromRT());
-    geometry_msgs::Twist cmd_vel_base;
-*/
+
     geometry_msgs::Twist raw_cmd_vel = *(cmd_vel_buffer_.readFromRT());
     geometry_msgs::Twist cmd_vel_global;
     geometry_msgs::Twist cmd_vel_base;
@@ -278,7 +274,47 @@ void SentryChassisController::update(const ros::Time& time, const ros::Duration&
         fabs(cmd_vel_base.angular.z) < 0.001) {
         cmd_vel_base = geometry_msgs::Twist();
     }
+/*
+//======================================================================    
+    // 在计算完cmd_vel_base后，添加以下代码：
+
+    // 航向保持PID（临时方案）
+    static double yaw_integral = 0.0;
+    static double last_yaw_error = 0.0;
+    const double yaw_kp = 0.1;    // 航向P增益
+    const double yaw_ki = 0.001;  // 航向I增益（很小）
+    const double yaw_kd = 0.05;   // 航向D增益
+
+     // 期望航向：保持当前航向（如果目标是直线）
+     
+    double desired_yaw_rate = 0.0;
     
+    // 如果有横向速度命令，期望航向会变化
+    if (fabs(cmd_vel_base.linear.x) > 0.1 && fabs(cmd_vel_base.linear.y) < 0.05) {
+    // 纯前进时，计算航向误差（基于当前位置偏移）
+    double current_yaw = odometry_.theta;
+    
+    // 简单修正：如果y位置偏离，产生一个恢复航向的角速度
+    double y_error = odometry_.y;  // 假设起点y=0
+    double yaw_error = -0.05 * y_error;  // y正偏移时向左转（负角速度）
+    
+    // PID计算
+    yaw_integral += yaw_error * period.toSec();
+    yaw_integral = std::max(-0.5, std::min(0.5, yaw_integral));  // 积分限幅
+    
+    double yaw_error_diff = (yaw_error - last_yaw_error) / period.toSec();
+    last_yaw_error = yaw_error;
+    
+    double yaw_correction = yaw_kp * yaw_error + yaw_ki * yaw_integral + yaw_kd * yaw_error_diff;
+    
+    // 叠加到角速度命令
+    cmd_vel_base.angular.z += yaw_correction;
+    
+    // 调试输出
+    ROS_DEBUG_THROTTLE(1.0, "Yaw correction: y_err=%.3f, correction=%.3f", y_error,       yaw_correction);
+    }
+//==========================================================================================
+*/    
      // ===== 新增2：自锁功能（核心逻辑，不影响原有运动）=====
     static bool is_locked = false;          // 是否自锁
     static ros::Time last_move_time = time; // 上次运动时间
@@ -359,10 +395,6 @@ void SentryChassisController::update(const ros::Time& time, const ros::Duration&
     double current_wheel_vel_bl = wheel_bl_.getVelocity();
     double current_wheel_vel_br = wheel_br_.getVelocity();
     
-    // double current_steer_pos_fl = steer_fl_.getPosition();
-    // double current_steer_pos_fr = steer_fr_.getPosition();
-    // double current_steer_pos_bl = steer_bl_.getPosition();
-    // double current_steer_pos_br = steer_br_.getPosition();
 
     // 建议修改为：
     double current_steer_pos_fl = angles::normalize_angle(steer_fl_.getPosition());
@@ -383,16 +415,6 @@ void SentryChassisController::update(const ros::Time& time, const ros::Duration&
     const double wheel_feedforward_gain = 0.8; // 前馈增益（可配置）
     const double steer_feedforward_gain = 0.8; // 前馈增益（可配置）
 
-    // double wheel_torque_fl = pid_wheel_fl_.computeCommand(wheel_velocities[0] - current_wheel_vel_fl, period);
-    // double wheel_torque_fr = pid_wheel_fr_.computeCommand(wheel_velocities[1] - current_wheel_vel_fr, period);
-    // double wheel_torque_bl = pid_wheel_bl_.computeCommand(wheel_velocities[2] - current_wheel_vel_bl, period);
-    // double wheel_torque_br = pid_wheel_br_.computeCommand(wheel_velocities[3] - current_wheel_vel_br, period);
-    
-    // double steer_torque_fl = pid_steer_fl_.computeCommand(angle_error_fl, period);
-    // double steer_torque_fr = pid_steer_fr_.computeCommand(angle_error_fr, period);
-    // double steer_torque_bl = pid_steer_bl_.computeCommand(angle_error_bl, period);
-    // double steer_torque_br = pid_steer_br_.computeCommand(angle_error_br, period);
-   
     // 车轮PID + 前馈（前馈基于目标速度）
     double wheel_torque_fl = wheel_feedforward_gain * wheel_velocities[0] +
                              pid_wheel_fl_.computeCommand(wheel_velocities[0] - current_wheel_vel_fl, period);
@@ -567,11 +589,11 @@ void SentryChassisController::forwardKinematics(double wheel_angular_velocities[
     vx = 0.0;
     vy = 0.0;
     omega = 0.0;
-    
+   
     for (int i = 0; i < 4; i++) {
         double x = wheel_positions[i][0];
         double y = wheel_positions[i][1];
-
+/*
          // ===== 新增4：分母保护（理论上x²+y²≠0，防止极端情况除以0）=====
         double denom = x*x + y*y;
         if (denom < 1e-6) { // 分母过小，跳过该轮（避免NaN）
@@ -581,11 +603,10 @@ void SentryChassisController::forwardKinematics(double wheel_angular_velocities[
         vx += wheel_vx[i];
         vy += wheel_vy[i];
         omega += (-wheel_vx[i] * y + wheel_vy[i] * x) / (x*x + y*y);
+*/
+ 
+
     }
-    
-    vx /= 4.0;
-    vy /= 4.0;
-    omega /= 4.0;
 
     // ===== 新增5：最终速度零漂过滤（里程计无漂移）=====
     const double final_thresh = 0.001;
@@ -632,23 +653,18 @@ void SentryChassisController::computeOdometry(const ros::Duration& period) {
     double current_wheel_vel_bl = wheel_bl_.getVelocity();
     double current_wheel_vel_br = wheel_br_.getVelocity();
     
-    double current_steer_pos_fl = steer_fl_.getPosition();
-    double current_steer_pos_fr = steer_fr_.getPosition();
-    double current_steer_pos_bl = steer_bl_.getPosition();
-    double current_steer_pos_br = steer_br_.getPosition();
-    
+    double current_steer_pos_fl = angles::normalize_angle(steer_fl_.getPosition());
+    double current_steer_pos_fr = angles::normalize_angle(steer_fr_.getPosition());
+    double current_steer_pos_bl = angles::normalize_angle(steer_bl_.getPosition());
+    double current_steer_pos_br = angles::normalize_angle(steer_br_.getPosition());
+      
     double wheel_angular_velocities[4] = {
         current_wheel_vel_fl,
         current_wheel_vel_fr,
         current_wheel_vel_bl,
         current_wheel_vel_br
     };
-    
-    // double wheel_angles[4] = {
-    //     current_steer_pos_fl,
-    //     current_steer_pos_fr,
-    //     current_steer_pos_bl,
-    //     current_steer_pos_br
+
 
     double wheel_angles[4] = {
     angles::normalize_angle(current_steer_pos_fl),
@@ -664,12 +680,12 @@ void SentryChassisController::computeOdometry(const ros::Duration& period) {
     odometry_.vx = vx;
     odometry_.vy = vy;
     odometry_.vtheta = omega;
-    
+
     double dt = period.toSec();
     double delta_x = (odometry_.vx * cos(odometry_.theta) - odometry_.vy * sin(odometry_.theta)) * dt;
     double delta_y = (odometry_.vx * sin(odometry_.theta) + odometry_.vy * cos(odometry_.theta)) * dt;
     double delta_theta = odometry_.vtheta * dt;
-    
+ 
     odometry_.x += delta_x;
     odometry_.y += delta_y;
     odometry_.theta += delta_theta;

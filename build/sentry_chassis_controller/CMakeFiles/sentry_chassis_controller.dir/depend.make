@@ -120,6 +120,7 @@ CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /o
 CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /opt/ros/noetic/include/ros/wall_timer_options.h
 CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /opt/ros/noetic/include/rosconsole/macros_generated.h
 CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /opt/ros/noetic/include/sensor_msgs/ChannelFloat32.h
+CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /opt/ros/noetic/include/sensor_msgs/Imu.h
 CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /opt/ros/noetic/include/sensor_msgs/PointCloud.h
 CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /opt/ros/noetic/include/std_msgs/Empty.h
 CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h

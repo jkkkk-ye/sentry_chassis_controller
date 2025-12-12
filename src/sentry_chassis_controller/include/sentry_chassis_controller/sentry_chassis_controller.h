@@ -17,6 +17,9 @@
 #include <boost/thread/mutex.hpp>  // 互斥锁（实时性保护）
 #include <angles/angles.h>         // 角度归一化（全向轮角度处理）
 
+#include <sensor_msgs/Imu.h>
+#include <tf/tf.h>
+
 namespace sentry_chassis_controller {
 
 class SentryChassisController : public controller_interface::Controller<hardware_interface::EffortJointInterface>
@@ -32,6 +35,12 @@ public:
     void starting(const ros::Time& time) override;
     void update(const ros::Time& time, const ros::Duration& period) override;
     void stopping(const ros::Time& time) override;
+    
+    void resetSteerPositions() {
+        ROS_WARN("Resetting all steer positions to 0!");
+        // 这里无法直接设置硬件位置，但可以通过PID强制归零
+        // 或者发布一个服务调用到仿真环境
+    }
     
 private:
     enum ControlMode {
@@ -103,6 +112,14 @@ private:
     ros::Time last_cmd_vel_time_;           // 上次收到指令的时间
     double max_accel_linear_;               // 最大线加速度 (m/s²)
     double max_accel_angular_;              // 最大角加速度 (rad/s²)
+    
+     // IMU相关
+    ros::Subscriber imu_sub_;
+    double imu_yaw_;
+    bool use_imu_for_yaw_;
+    ros::Time last_imu_time_;
+    
+    void imuCallback(const sensor_msgs::Imu::ConstPtr& msg);
     
     
     void cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg);

@@ -1,0 +1,13 @@
+[35m[1mScanning dependencies of target sentry_chassis_controller[0m
+[ 33%] Built target sentry_chassis_controller_gencfg
+[ 66%] [32mBuilding CXX object CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o[0m
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:[m[K In member function ‘[01m[Kvoid sentry_chassis_controller::SentryChassisController::forwardKinematics(double*, double*, double&, double&, double&)[m[K’:
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:646:5:[m[K [01;31m[Kerror: [m[K‘[01m[KEigen[m[K’ has not been declared
+  646 |     [01;31m[KEigen[m[K::Vector3d x_est = (A.transpose() * A).ldlt().solve(A.transpose() * b);
+      |     [01;31m[K^~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:648:10:[m[K [01;31m[Kerror: [m[K‘[01m[Kx_est[m[K’ was not declared in this scope
+  648 |     vx = [01;31m[Kx_est[m[K(0);
+      |          [01;31m[K^~~~~[m[K
+make[2]: *** [CMakeFiles/sentry_chassis_controller.dir/build.make:63：CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:214：CMakeFiles/sentry_chassis_controller.dir/all] 错误 2
+make: *** [Makefile:141：all] 错误 2
