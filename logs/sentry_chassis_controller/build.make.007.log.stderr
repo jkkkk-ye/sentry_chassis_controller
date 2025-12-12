@@ -1,0 +1,36 @@
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:[m[K In member function ‘[01m[Kvirtual void sentry_chassis_controller::SentryChassisController::update(const ros::Time&, const ros::Duration&)[m[K’:
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:311:20:[m[K [01;31m[Kerror: [m[Kredeclaration of ‘[01m[Kdouble angle_error_fl[m[K’
+  311 |             double [01;31m[Kangle_error_fl[m[K = angles::shortest_angular_distance(current_steer_pos_fl, wheel_angles[0]);
+      |                    [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:305:20:[m[K [01;36m[Knote: [m[K‘[01m[Kdouble angle_error_fl[m[K’ previously declared here
+  305 |             double [01;36m[Kangle_error_fl[m[K = angles::shortest_angular_distance(current_steer_pos_fl, lock_angles[0]);
+      |                    [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:311:93:[m[K [01;31m[Kerror: [m[K‘[01m[Kwheel_angles[m[K’ was not declared in this scope
+  311 |             double angle_error_fl = angles::shortest_angular_distance(current_steer_pos_fl, [01;31m[Kwheel_angles[m[K[0]);
+      |                                                                                             [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:316:13:[m[K [01;31m[Kerror: [m[K‘[01m[Ksteer_torque_fl[m[K’ was not declared in this scope; did you mean ‘[01m[Kmax_steer_torque_[m[K’?
+  316 |             [01;31m[Ksteer_torque_fl[m[K = pid_steer_fl_.computeCommand(angle_error_fl, period, true);
+      |             [01;31m[K^~~~~~~~~~~~~~~[m[K
+      |             [32m[Kmax_steer_torque_[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:316:88:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kcontrol_toolbox::Pid::computeCommand(double&, const ros::Duration&, bool)[m[K’
+  316 |             steer_torque_fl = pid_steer_fl_.computeCommand(angle_error_fl, period, true[01;31m[K)[m[K;
+      |                                                                                        [01;31m[K^[m[K
+In file included from [01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/include/sentry_chassis_controller/sentry_chassis_controller.h:6[m[K,
+                 from [01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/control_toolbox/pid.h:307:10:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kdouble control_toolbox::Pid::computeCommand(double, ros::Duration)[m[K’
+  307 |   double [01;36m[KcomputeCommand[m[K(double error, ros::Duration dt);
+      |          [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/control_toolbox/pid.h:307:10:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 3 provided
+[01m[K/opt/ros/noetic/include/control_toolbox/pid.h:320:10:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kdouble control_toolbox::Pid::computeCommand(double, double, ros::Duration)[m[K’
+  320 |   double [01;36m[KcomputeCommand[m[K(double error, double error_dot, ros::Duration dt);
+      |          [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/control_toolbox/pid.h:320:46:[m[K [01;36m[Knote: [m[K  no known conversion for argument 2 from ‘[01m[Kconst ros::Duration[m[K’ to ‘[01m[Kdouble[m[K’
+  320 |   double computeCommand(double error, [01;36m[Kdouble error_dot[m[K, ros::Duration dt);
+      |                                       [01;36m[K~~~~~~~^~~~~~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:319:13:[m[K [01;31m[Kerror: [m[K‘[01m[Ksteer_torque_fl[m[K’ was not declared in this scope; did you mean ‘[01m[Kmax_steer_torque_[m[K’?
+  319 |             [01;31m[Ksteer_torque_fl[m[K = pid_steer_fl_.computeCommand(angle_error_fl, period);
+      |             [01;31m[K^~~~~~~~~~~~~~~[m[K
+      |             [32m[Kmax_steer_torque_[m[K
+make[2]: *** [CMakeFiles/sentry_chassis_controller.dir/build.make:63：CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:214：CMakeFiles/sentry_chassis_controller.dir/all] 错误 2
+make: *** [Makefile:141：all] 错误 2

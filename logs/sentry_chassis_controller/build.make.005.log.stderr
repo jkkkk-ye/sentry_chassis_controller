@@ -1,0 +1,16 @@
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:[m[K In function ‘[01m[Kvoid sentry_chassis_controller::smoothVelocityCommand(const Twist&, const ros::Duration&)[m[K’:
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:197:42:[m[K [01;31m[Kerror: [m[K‘[01m[Kfiltered_cmd_vel_[m[K’ was not declared in this scope
+  197 |     double delta_vx = raw_cmd.linear.x - [01;31m[Kfiltered_cmd_vel_[m[K.linear.x;
+      |                                          [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:198:27:[m[K [01;31m[Kerror: [m[K‘[01m[Kmax_accel_linear_[m[K’ was not declared in this scope
+  198 |     double max_delta_vx = [01;31m[Kmax_accel_linear_[m[K * dt;
+      |                           [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:216:27:[m[K [01;31m[Kerror: [m[K‘[01m[Kmax_accel_angular_[m[K’ was not declared in this scope
+  216 |     double max_delta_wz = [01;31m[Kmax_accel_angular_[m[K * dt;
+      |                           [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/jkkkk/ros_ws/src/sentry_chassis_controller/src/sentry_chassis_controller.cpp:224:5:[m[K [01;31m[Kerror: [m[K‘[01m[Klast_raw_cmd_vel_[m[K’ was not declared in this scope
+  224 |     [01;31m[Klast_raw_cmd_vel_[m[K = raw_cmd;
+      |     [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/sentry_chassis_controller.dir/build.make:63：CMakeFiles/sentry_chassis_controller.dir/src/sentry_chassis_controller.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:214：CMakeFiles/sentry_chassis_controller.dir/all] 错误 2
+make: *** [Makefile:141：all] 错误 2

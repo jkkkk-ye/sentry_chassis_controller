@@ -13,53 +13,55 @@ Reads and maintains the following parameters on the ROS server
 - \b "~slip_thresh" : \b [double] Slip detect threshold (rad/s) min: 0.1, default: 0.5, max: 2.0
 - \b "~slip_reduce_gain" : \b [double] Slip speed reduce gain min: 0.1, default: 0.7, max: 1.0
 - \b "~max_wheel_torque" : \b [double] Max wheel output torque (N·m) min: 0.0, default: 25.0, max: 50.0
-- \b "~max_steer_torque" : \b [double] Max steer output torque (N·m) min: 0.0, default: 10.0, max: 20.0
-- \b "~wheel_fl_p" : \b [double] Front left wheel P gain min: 0.0, default: 2.0, max: 100.0
-- \b "~wheel_fl_i" : \b [double] Front left wheel I gain min: 0.0, default: 0.1, max: 10.0
+- \b "~max_steer_torque" : \b [double] Max steer output torque (N·m) min: 0.0, default: 6.0, max: 20.0
+- \b "~max_accel_linear" : \b [double] 最大线加速度 (m/s²) min: 0.1, default: 1.0, max: 3.0
+- \b "~max_accel_angular" : \b [double] 最大角加速度 (rad/s²) min: 0.1, default: 1.57, max: 3.0
+- \b "~wheel_fl_p" : \b [double] Front left wheel P gain min: 0.0, default: 2.25, max: 100.0
+- \b "~wheel_fl_i" : \b [double] Front left wheel I gain min: 0.0, default: 0.226, max: 10.0
 - \b "~wheel_fl_d" : \b [double] Front left wheel D gain min: 0.0, default: 0.0, max: 10.0
 - \b "~wheel_fl_i_max" : \b [double] Front left wheel max integral min: 0.0, default: 10.0, max: 100.0
 - \b "~wheel_fl_i_min" : \b [double] Front left wheel min integral min: -100.0, default: -10.0, max: 0.0
 - \b "~wheel_fl_antiwindup" : \b [bool] Front left wheel anti-windup min: False, default: True, max: True
-- \b "~wheel_fr_p" : \b [double] Front right wheel P gain min: 0.0, default: 2.0, max: 100.0
-- \b "~wheel_fr_i" : \b [double] Front right wheel I gain min: 0.0, default: 0.1, max: 10.0
+- \b "~wheel_fr_p" : \b [double] Front right wheel P gain min: 0.0, default: 2.25, max: 100.0
+- \b "~wheel_fr_i" : \b [double] Front right wheel I gain min: 0.0, default: 0.226, max: 10.0
 - \b "~wheel_fr_d" : \b [double] Front right wheel D gain min: 0.0, default: 0.0, max: 10.0
 - \b "~wheel_fr_i_max" : \b [double] Front right wheel max integral min: 0.0, default: 10.0, max: 100.0
 - \b "~wheel_fr_i_min" : \b [double] Front right wheel min integral min: -100.0, default: -10.0, max: 0.0
 - \b "~wheel_fr_antiwindup" : \b [bool] Front right wheel anti-windup min: False, default: True, max: True
-- \b "~wheel_bl_p" : \b [double] Back left wheel P gain min: 0.0, default: 2.0, max: 100.0
-- \b "~wheel_bl_i" : \b [double] Back left wheel I gain min: 0.0, default: 0.1, max: 10.0
+- \b "~wheel_bl_p" : \b [double] Back left wheel P gain min: 0.0, default: 2.25, max: 100.0
+- \b "~wheel_bl_i" : \b [double] Back left wheel I gain min: 0.0, default: 0.226, max: 10.0
 - \b "~wheel_bl_d" : \b [double] Back left wheel D gain min: 0.0, default: 0.0, max: 10.0
 - \b "~wheel_bl_i_max" : \b [double] Back left wheel max integral min: 0.0, default: 10.0, max: 100.0
 - \b "~wheel_bl_i_min" : \b [double] Back left wheel min integral min: -100.0, default: -10.0, max: 0.0
 - \b "~wheel_bl_antiwindup" : \b [bool] Back left wheel anti-windup min: False, default: True, max: True
-- \b "~wheel_br_p" : \b [double] Back right wheel P gain min: 0.0, default: 2.0, max: 100.0
-- \b "~wheel_br_i" : \b [double] Back right wheel I gain min: 0.0, default: 0.1, max: 10.0
+- \b "~wheel_br_p" : \b [double] Back right wheel P gain min: 0.0, default: 2.25, max: 100.0
+- \b "~wheel_br_i" : \b [double] Back right wheel I gain min: 0.0, default: 0.226, max: 10.0
 - \b "~wheel_br_d" : \b [double] Back right wheel D gain min: 0.0, default: 0.0, max: 10.0
 - \b "~wheel_br_i_max" : \b [double] Back right wheel max integral min: 0.0, default: 10.0, max: 100.0
 - \b "~wheel_br_i_min" : \b [double] Back right wheel min integral min: -100.0, default: -10.0, max: 0.0
 - \b "~wheel_br_antiwindup" : \b [bool] Back right wheel anti-windup min: False, default: True, max: True
-- \b "~steer_fl_p" : \b [double] Front left steer P gain min: 0.0, default: 10.0, max: 100.0
-- \b "~steer_fl_i" : \b [double] Front left steer I gain min: 0.0, default: 1.0, max: 10.0
-- \b "~steer_fl_d" : \b [double] Front left steer D gain min: 0.0, default: 0.5, max: 10.0
-- \b "~steer_fl_i_max" : \b [double] Front left steer max integral min: 0.0, default: 5.0, max: 100.0
-- \b "~steer_fl_i_min" : \b [double] Front left steer min integral min: -100.0, default: -5.0, max: 0.0
+- \b "~steer_fl_p" : \b [double] Front left steer P gain min: 0.0, default: 5.0, max: 100.0
+- \b "~steer_fl_i" : \b [double] Front left steer I gain min: 0.0, default: 0.3, max: 10.0
+- \b "~steer_fl_d" : \b [double] Front left steer D gain min: 0.0, default: 0.05, max: 10.0
+- \b "~steer_fl_i_max" : \b [double] Front left steer max integral min: 0.0, default: 0.6, max: 100.0
+- \b "~steer_fl_i_min" : \b [double] Front left steer min integral min: -100.0, default: -0.6, max: 0.0
 - \b "~steer_fl_antiwindup" : \b [bool] Front left steer anti-windup min: False, default: True, max: True
-- \b "~steer_fr_p" : \b [double] Front right steer P gain min: 0.0, default: 10.0, max: 100.0
-- \b "~steer_fr_i" : \b [double] Front right steer I gain min: 0.0, default: 1.0, max: 10.0
-- \b "~steer_fr_d" : \b [double] Front right steer D gain min: 0.0, default: 0.5, max: 10.0
-- \b "~steer_fr_i_max" : \b [double] Front right steer max integral min: 0.0, default: 5.0, max: 100.0
-- \b "~steer_fr_i_min" : \b [double] Front right steer min integral min: -100.0, default: -5.0, max: 0.0
+- \b "~steer_fr_p" : \b [double] Front right steer P gain min: 0.0, default: 5.0, max: 100.0
+- \b "~steer_fr_i" : \b [double] Front right steer I gain min: 0.0, default: 0.3, max: 10.0
+- \b "~steer_fr_d" : \b [double] Front right steer D gain min: 0.0, default: 0.05, max: 10.0
+- \b "~steer_fr_i_max" : \b [double] Front right steer max integral min: 0.0, default: 0.6, max: 100.0
+- \b "~steer_fr_i_min" : \b [double] Front right steer min integral min: -100.0, default: -0.6, max: 0.0
 - \b "~steer_fr_antiwindup" : \b [bool] Front right steer anti-windup min: False, default: True, max: True
-- \b "~steer_bl_p" : \b [double] Back left steer P gain min: 0.0, default: 10.0, max: 100.0
-- \b "~steer_bl_i" : \b [double] Back left steer I gain min: 0.0, default: 1.0, max: 10.0
-- \b "~steer_bl_d" : \b [double] Back left steer D gain min: 0.0, default: 0.5, max: 10.0
-- \b "~steer_bl_i_max" : \b [double] Back left steer max integral min: 0.0, default: 5.0, max: 100.0
-- \b "~steer_bl_i_min" : \b [double] Back left steer min integral min: -100.0, default: -5.0, max: 0.0
+- \b "~steer_bl_p" : \b [double] Back left steer P gain min: 0.0, default: 5.0, max: 100.0
+- \b "~steer_bl_i" : \b [double] Back left steer I gain min: 0.0, default: 0.3, max: 10.0
+- \b "~steer_bl_d" : \b [double] Back left steer D gain min: 0.0, default: 0.05, max: 10.0
+- \b "~steer_bl_i_max" : \b [double] Back left steer max integral min: 0.0, default: 0.6, max: 100.0
+- \b "~steer_bl_i_min" : \b [double] Back left steer min integral min: -100.0, default: -0.6, max: 0.0
 - \b "~steer_bl_antiwindup" : \b [bool] Back left steer anti-windup min: False, default: True, max: True
-- \b "~steer_br_p" : \b [double] Back right steer P gain min: 0.0, default: 10.0, max: 100.0
-- \b "~steer_br_i" : \b [double] Back right steer I gain min: 0.0, default: 1.0, max: 10.0
-- \b "~steer_br_d" : \b [double] Back right steer D gain min: 0.0, default: 0.5, max: 10.0
-- \b "~steer_br_i_max" : \b [double] Back right steer max integral min: 0.0, default: 5.0, max: 100.0
-- \b "~steer_br_i_min" : \b [double] Back right steer min integral min: -100.0, default: -5.0, max: 0.0
+- \b "~steer_br_p" : \b [double] Back right steer P gain min: 0.0, default: 5.0, max: 100.0
+- \b "~steer_br_i" : \b [double] Back right steer I gain min: 0.0, default: 0.3, max: 10.0
+- \b "~steer_br_d" : \b [double] Back right steer D gain min: 0.0, default: 0.05, max: 10.0
+- \b "~steer_br_i_max" : \b [double] Back right steer max integral min: 0.0, default: 0.6, max: 100.0
+- \b "~steer_br_i_min" : \b [double] Back right steer min integral min: -100.0, default: -0.6, max: 0.0
 - \b "~steer_br_antiwindup" : \b [bool] Back right steer anti-windup min: False, default: True, max: True
 

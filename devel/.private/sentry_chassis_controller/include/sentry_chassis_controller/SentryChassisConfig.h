@@ -251,6 +251,8 @@ class DEFAULT
         if("slip_reduce_gain"==(*_i)->name){slip_reduce_gain = boost::any_cast<double>(val);}
         if("max_wheel_torque"==(*_i)->name){max_wheel_torque = boost::any_cast<double>(val);}
         if("max_steer_torque"==(*_i)->name){max_steer_torque = boost::any_cast<double>(val);}
+        if("max_accel_linear"==(*_i)->name){max_accel_linear = boost::any_cast<double>(val);}
+        if("max_accel_angular"==(*_i)->name){max_accel_angular = boost::any_cast<double>(val);}
         if("wheel_fl_p"==(*_i)->name){wheel_fl_p = boost::any_cast<double>(val);}
         if("wheel_fl_i"==(*_i)->name){wheel_fl_i = boost::any_cast<double>(val);}
         if("wheel_fl_d"==(*_i)->name){wheel_fl_d = boost::any_cast<double>(val);}
@@ -314,6 +316,8 @@ double slip_thresh;
 double slip_reduce_gain;
 double max_wheel_torque;
 double max_steer_torque;
+double max_accel_linear;
+double max_accel_angular;
 double wheel_fl_p;
 double wheel_fl_i;
 double wheel_fl_d;
@@ -395,6 +399,10 @@ bool steer_br_antiwindup;
       double max_wheel_torque;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       double max_steer_torque;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      double max_accel_linear;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      double max_accel_angular;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       double wheel_fl_p;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -744,17 +752,37 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.max_steer_torque = 20.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.max_steer_torque = 10.0;
+      __default__.max_steer_torque = 6.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("max_steer_torque", "double", 0, "Max steer output torque (N·m)", "", &SentryChassisConfig::max_steer_torque)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __param_descriptions__.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("max_steer_torque", "double", 0, "Max steer output torque (N·m)", "", &SentryChassisConfig::max_steer_torque)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __min__.max_accel_linear = 0.1;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __max__.max_accel_linear = 3.0;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __default__.max_accel_linear = 1.0;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("max_accel_linear", "double", 0, "最大线加速度 (m/s²)", "", &SentryChassisConfig::max_accel_linear)));
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __param_descriptions__.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("max_accel_linear", "double", 0, "最大线加速度 (m/s²)", "", &SentryChassisConfig::max_accel_linear)));
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __min__.max_accel_angular = 0.1;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __max__.max_accel_angular = 3.0;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __default__.max_accel_angular = 1.57;
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("max_accel_angular", "double", 0, "最大角加速度 (rad/s²)", "", &SentryChassisConfig::max_accel_angular)));
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __param_descriptions__.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("max_accel_angular", "double", 0, "最大角加速度 (rad/s²)", "", &SentryChassisConfig::max_accel_angular)));
+//#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __min__.wheel_fl_p = 0.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_fl_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_fl_p = 2.0;
+      __default__.wheel_fl_p = 2.25;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_fl_p", "double", 0, "Front left wheel P gain", "", &SentryChassisConfig::wheel_fl_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -764,7 +792,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_fl_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_fl_i = 0.1;
+      __default__.wheel_fl_i = 0.226;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_fl_i", "double", 0, "Front left wheel I gain", "", &SentryChassisConfig::wheel_fl_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -814,7 +842,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_fr_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_fr_p = 2.0;
+      __default__.wheel_fr_p = 2.25;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_fr_p", "double", 0, "Front right wheel P gain", "", &SentryChassisConfig::wheel_fr_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -824,7 +852,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_fr_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_fr_i = 0.1;
+      __default__.wheel_fr_i = 0.226;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_fr_i", "double", 0, "Front right wheel I gain", "", &SentryChassisConfig::wheel_fr_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -874,7 +902,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_bl_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_bl_p = 2.0;
+      __default__.wheel_bl_p = 2.25;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_bl_p", "double", 0, "Back left wheel P gain", "", &SentryChassisConfig::wheel_bl_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -884,7 +912,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_bl_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_bl_i = 0.1;
+      __default__.wheel_bl_i = 0.226;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_bl_i", "double", 0, "Back left wheel I gain", "", &SentryChassisConfig::wheel_bl_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -934,7 +962,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_br_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_br_p = 2.0;
+      __default__.wheel_br_p = 2.25;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_br_p", "double", 0, "Back right wheel P gain", "", &SentryChassisConfig::wheel_br_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -944,7 +972,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.wheel_br_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.wheel_br_i = 0.1;
+      __default__.wheel_br_i = 0.226;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("wheel_br_i", "double", 0, "Back right wheel I gain", "", &SentryChassisConfig::wheel_br_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -994,7 +1022,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fl_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fl_p = 10.0;
+      __default__.steer_fl_p = 5.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fl_p", "double", 0, "Front left steer P gain", "", &SentryChassisConfig::steer_fl_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1004,7 +1032,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fl_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fl_i = 1.0;
+      __default__.steer_fl_i = 0.3;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fl_i", "double", 0, "Front left steer I gain", "", &SentryChassisConfig::steer_fl_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1014,7 +1042,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fl_d = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fl_d = 0.5;
+      __default__.steer_fl_d = 0.05;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fl_d", "double", 0, "Front left steer D gain", "", &SentryChassisConfig::steer_fl_d)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1024,7 +1052,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fl_i_max = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fl_i_max = 5.0;
+      __default__.steer_fl_i_max = 0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fl_i_max", "double", 0, "Front left steer max integral", "", &SentryChassisConfig::steer_fl_i_max)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1034,7 +1062,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fl_i_min = 0.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fl_i_min = -5.0;
+      __default__.steer_fl_i_min = -0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fl_i_min", "double", 0, "Front left steer min integral", "", &SentryChassisConfig::steer_fl_i_min)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1054,7 +1082,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fr_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fr_p = 10.0;
+      __default__.steer_fr_p = 5.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fr_p", "double", 0, "Front right steer P gain", "", &SentryChassisConfig::steer_fr_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1064,7 +1092,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fr_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fr_i = 1.0;
+      __default__.steer_fr_i = 0.3;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fr_i", "double", 0, "Front right steer I gain", "", &SentryChassisConfig::steer_fr_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1074,7 +1102,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fr_d = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fr_d = 0.5;
+      __default__.steer_fr_d = 0.05;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fr_d", "double", 0, "Front right steer D gain", "", &SentryChassisConfig::steer_fr_d)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1084,7 +1112,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fr_i_max = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fr_i_max = 5.0;
+      __default__.steer_fr_i_max = 0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fr_i_max", "double", 0, "Front right steer max integral", "", &SentryChassisConfig::steer_fr_i_max)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1094,7 +1122,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_fr_i_min = 0.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_fr_i_min = -5.0;
+      __default__.steer_fr_i_min = -0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_fr_i_min", "double", 0, "Front right steer min integral", "", &SentryChassisConfig::steer_fr_i_min)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1114,7 +1142,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_bl_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_bl_p = 10.0;
+      __default__.steer_bl_p = 5.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_bl_p", "double", 0, "Back left steer P gain", "", &SentryChassisConfig::steer_bl_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1124,7 +1152,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_bl_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_bl_i = 1.0;
+      __default__.steer_bl_i = 0.3;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_bl_i", "double", 0, "Back left steer I gain", "", &SentryChassisConfig::steer_bl_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1134,7 +1162,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_bl_d = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_bl_d = 0.5;
+      __default__.steer_bl_d = 0.05;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_bl_d", "double", 0, "Back left steer D gain", "", &SentryChassisConfig::steer_bl_d)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1144,7 +1172,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_bl_i_max = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_bl_i_max = 5.0;
+      __default__.steer_bl_i_max = 0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_bl_i_max", "double", 0, "Back left steer max integral", "", &SentryChassisConfig::steer_bl_i_max)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1154,7 +1182,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_bl_i_min = 0.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_bl_i_min = -5.0;
+      __default__.steer_bl_i_min = -0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_bl_i_min", "double", 0, "Back left steer min integral", "", &SentryChassisConfig::steer_bl_i_min)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1174,7 +1202,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_br_p = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_br_p = 10.0;
+      __default__.steer_br_p = 5.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_br_p", "double", 0, "Back right steer P gain", "", &SentryChassisConfig::steer_br_p)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1184,7 +1212,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_br_i = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_br_i = 1.0;
+      __default__.steer_br_i = 0.3;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_br_i", "double", 0, "Back right steer I gain", "", &SentryChassisConfig::steer_br_i)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1194,7 +1222,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_br_d = 10.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_br_d = 0.5;
+      __default__.steer_br_d = 0.05;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_br_d", "double", 0, "Back right steer D gain", "", &SentryChassisConfig::steer_br_d)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1204,7 +1232,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_br_i_max = 100.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_br_i_max = 5.0;
+      __default__.steer_br_i_max = 0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_br_i_max", "double", 0, "Back right steer max integral", "", &SentryChassisConfig::steer_br_i_max)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
@@ -1214,7 +1242,7 @@ SentryChassisConfig::GroupDescription<SentryChassisConfig::DEFAULT, SentryChassi
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __max__.steer_br_i_min = 0.0;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.steer_br_i_min = -5.0;
+      __default__.steer_br_i_min = -0.6;
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(SentryChassisConfig::AbstractParamDescriptionConstPtr(new SentryChassisConfig::ParamDescription<double>("steer_br_i_min", "double", 0, "Back right steer min integral", "", &SentryChassisConfig::steer_br_i_min)));
 //#line 292 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"

@@ -96,6 +96,14 @@ private:
     double max_wheel_torque_;      // 车轮最大输出力矩（N·m）
     double max_steer_torque_;      // 舵机最大输出力矩（N·m）
     
+    //加速度限制新增
+    // 指令平滑滤波器
+    geometry_msgs::Twist filtered_cmd_vel_; // 经过平滑后的当前指令
+    geometry_msgs::Twist last_raw_cmd_vel_; // 上一周期的原始指令，用于计算变化
+    ros::Time last_cmd_vel_time_;           // 上次收到指令的时间
+    double max_accel_linear_;               // 最大线加速度 (m/s²)
+    double max_accel_angular_;              // 最大角加速度 (rad/s²)
+    
     
     void cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg);
     void reconfigureCallback(SentryChassisConfig &config, uint32_t level);
@@ -109,6 +117,12 @@ private:
                           double& vx, double& vy, double& omega);
     bool transformVelocityToBaseLink(const geometry_msgs::Twist& global_vel,
                                      geometry_msgs::Twist& base_vel);
+/**
+     * @brief 使用加速度限制对速度指令进行平滑处理
+     * @param raw_cmd 新接收到的原始指令
+     * @param period 控制周期
+     */
+    void smoothVelocityCommand(const geometry_msgs::Twist& raw_cmd, const ros::Duration& period);                                 
 };
 
 }

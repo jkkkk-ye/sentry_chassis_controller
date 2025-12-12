@@ -122,6 +122,17 @@ bool SentryChassisController::init(hardware_interface::EffortJointInterface* hw,
     dyn_reconf_callback_ = boost::bind(&SentryChassisController::reconfigureCallback, this, _1, _2);
     dyn_reconf_server_->setCallback(dyn_reconf_callback_);
     
+//=====新增=====    
+    // 加速度限制参数 (可根据实际情况调整)
+    controller_nh.param("max_accel_linear", max_accel_linear_, 1.0);   // 默认1.0 m/s²
+    controller_nh.param("max_accel_angular", max_accel_angular_, 1.57); // 默认π/2 rad/s²
+
+    // 初始化平滑指令
+    filtered_cmd_vel_ = geometry_msgs::Twist();
+    last_raw_cmd_vel_ = geometry_msgs::Twist();
+    last_cmd_vel_time_ = ros::Time::now();
+//==============    
+
     return true;
 }
 
@@ -172,13 +183,76 @@ void SentryChassisController::starting(const ros::Time& time) {
     }
 }
 
+
+/**
+ * @brief 使用加速度限制对速度指令进行平滑处理
+ * @param raw_cmd 新接收到的原始指令
+ * @param period 控制周期
+ */
+void SentryChassisController::smoothVelocityCommand(const geometry_msgs::Twist& raw_cmd, const ros::Duration& period) {
+    double dt = period.toSec();
+    if (dt <= 0.0) {
+        // 如果时间间隔无效，直接使用原始指令
+        filtered_cmd_vel_ = raw_cmd;
+        return;
+    }
+
+    // --- 线速度X轴的平滑 ---
+    double delta_vx = raw_cmd.linear.x - filtered_cmd_vel_.linear.x;
+    double max_delta_vx = max_accel_linear_ * dt;
+    
+    if (fabs(delta_vx) > max_delta_vx) {
+        // 变化超过限制，使用最大变化率
+        filtered_cmd_vel_.linear.x += (delta_vx > 0 ? max_delta_vx : -max_delta_vx);
+    } else {
+        // 变化在限制内，直接使用目标值
+        filtered_cmd_vel_.linear.x = raw_cmd.linear.x;
+    }
+
+    // --- 线速度Y轴的平滑 ---
+    double delta_vy = raw_cmd.linear.y - filtered_cmd_vel_.linear.y;
+    double max_delta_vy = max_accel_linear_ * dt;
+    
+    if (fabs(delta_vy) > max_delta_vy) {
+        filtered_cmd_vel_.linear.y += (delta_vy > 0 ? max_delta_vy : -max_delta_vy);
+    } else {
+        filtered_cmd_vel_.linear.y = raw_cmd.linear.y;
+    }
+
+    // --- 角速度Z轴的平滑 ---
+    double delta_wz = raw_cmd.angular.z - filtered_cmd_vel_.angular.z;
+    double max_delta_wz = max_accel_angular_ * dt;
+    
+    if (fabs(delta_wz) > max_delta_wz) {
+        filtered_cmd_vel_.angular.z += (delta_wz > 0 ? max_delta_wz : -max_delta_wz);
+    } else {
+        filtered_cmd_vel_.angular.z = raw_cmd.angular.z;
+    }
+
+    // 可选：记录原始指令用于调试
+    last_raw_cmd_vel_ = raw_cmd;
+    last_cmd_vel_time_ = ros::Time::now();
+}
+
 void SentryChassisController::update(const ros::Time& time, const ros::Duration& period) {
     
     // ===== 新增1：实时性保护（互斥锁，避免多线程冲突）=====
     static boost::mutex control_mutex;
     boost::unique_lock<boost::mutex> lock(control_mutex);
+/*    
     geometry_msgs::Twist cmd_vel_global = *(cmd_vel_buffer_.readFromRT());
     geometry_msgs::Twist cmd_vel_base;
+*/
+    geometry_msgs::Twist raw_cmd_vel = *(cmd_vel_buffer_.readFromRT());
+    geometry_msgs::Twist cmd_vel_global;
+    geometry_msgs::Twist cmd_vel_base;
+    
+    // ===== 新增关键部分：加速度限制（指令平滑）=====
+    // 调用平滑函数，处理原始指令
+    smoothVelocityCommand(raw_cmd_vel, period);
+    // 使用平滑后的指令进行后续计算
+    cmd_vel_global = filtered_cmd_vel_;
+    
     
     // 调试信息
     static int count = 0;
@@ -232,12 +306,16 @@ void SentryChassisController::update(const ros::Time& time, const ros::Duration&
             double angle_error_fr = angles::shortest_angular_distance(current_steer_pos_fr, lock_angles[1]);
             double angle_error_bl = angles::shortest_angular_distance(current_steer_pos_bl, lock_angles[2]);
             double angle_error_br = angles::shortest_angular_distance(current_steer_pos_br, lock_angles[3]);
+            
 
             // 舵机PID锁定角度，车轮力矩归零
             double steer_torque_fl = pid_steer_fl_.computeCommand(angle_error_fl, period);
             double steer_torque_fr = pid_steer_fr_.computeCommand(angle_error_fr, period);
             double steer_torque_bl = pid_steer_bl_.computeCommand(angle_error_bl, period);
             double steer_torque_br = pid_steer_br_.computeCommand(angle_error_br, period);
+            
+            
+            
 
             // 新增：舵机力矩限幅（保护）
             const double max_steer_torque = 10.0; // 可配置，单位N·m
@@ -676,6 +754,11 @@ void SentryChassisController::reconfigureCallback(SentryChassisConfig &config, u
     }
     
     ROS_INFO("Control mode changed to: %s", control_mode_ == BASE_LINK_MODE ? "BASE_LINK_MODE" : "GLOBAL_MODE");
+    
+//===========    新增：加速度参数可调
+    max_accel_linear_ = config.max_accel_linear;
+    max_accel_angular_ = config.max_accel_angular;
+//==============
 }
 
 PLUGINLIB_EXPORT_CLASS(sentry_chassis_controller::SentryChassisController,

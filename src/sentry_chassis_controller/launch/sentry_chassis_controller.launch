@@ -20,7 +20,8 @@
   <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" 
         args="/joint_states/velocity[0] /joint_states/velocity[1] /joint_states/velocity[2] /joint_states/velocity[3]
               /joint_states/position[4] /joint_states/position[5] /joint_states/position[6] /joint_states/position[7]"/>
-              
+  <!-- 启动 RViz 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find smb_highlevel_controller)/config/1.rviz" />   -->        
   <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" />
   <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" />
 </launch>
